@@ -1,0 +1,32 @@
+﻿// SPDX-License-Identifier: MIT
+// Original neutral smoke demo; contains no third-party game material.
+Debug.logAsError();
+var demoFont = Font.addFont("DejaVuSansMono-Bold.ttf")[0];
+System.setArgument("-deffont", demoFont);
+global.demoWindow = new Window();
+demoWindow.caption = "Kirikiri iPad Runtime";
+demoWindow.setSize(960, 540);
+demoWindow.setInnerSize(960, 540);
+global.demoLayer = new Layer(demoWindow, null);
+demoLayer.setSize(960, 540);
+demoLayer.type = ltOpaque;
+demoLayer.visible = true;
+demoLayer.font.face = demoFont;
+demoLayer.font.height = 28;
+global.demoTaps = 0;
+global.drawDemo = function() {
+    demoLayer.fillRect(0, 0, 960, 540, 0x182334);
+    demoLayer.drawText(48, 54, "Kirikiri iPad Runtime", 0xFFFFFF);
+    demoLayer.drawText(48, 120, "Engine ready. Tap anywhere: " + demoTaps, 0x80D8FF);
+    demoLayer.drawText(48, 220, "Copy your compatible game to Documents/Game.", 0xFFFFFF);
+    demoLayer.drawText(48, 268, "Then close this app and reopen it.", 0xFFFFFF);
+    demoLayer.drawText(48, 350, "This demo contains no game assets.", 0xB0BDCC);
+};
+demoLayer.onClick = function(x, y) {
+    demoTaps++;
+    drawDemo();
+    Debug.notice("RUNTIME_DEMO tap=" + demoTaps);
+};
+drawDemo();
+demoWindow.visible = true;
+Debug.notice("RUNTIME_DEMO ready");
